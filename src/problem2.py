@@ -163,13 +163,25 @@ def problem2b(rect, n, delta, win):
     y = rect.corner_1.y
     x2 = rect.corner_2.x
     y2 = rect.corner_2.y
-    for k in range(n):
-        rect = rg.Rectangle(rg.Point(x - delta, y - delta), rg.Point(x2 + delta, y2 + delta))
-        x = x - delta
-        y = y - delta
-        x2 = x2 + delta
-        y2 = y2 + delta
-        rect.attach_to(win)
+
+    if x2 > x:
+        for k in range(n-1):
+            rect = rg.Rectangle(rg.Point(x - delta, y - delta), rg.Point(x2 + delta, y2 + delta))
+            x = x - delta
+            y = y - delta
+            x2 = x2 + delta
+            y2 = y2 + delta
+            rect.attach_to(win)
+    win.render()
+
+    if x > x2:
+        for k in range(n-1):
+            rect = rg.Rectangle(rg.Point(x + delta, y + delta), rg.Point(x2 - delta, y2 - delta))
+            x = x + delta
+            y = y + delta
+            x2 = x2 - delta
+            y2 = y2 - delta
+            rect.attach_to(win)
     win.render()
     """
     See   problem2b_picture.pdf   in this project for pictures
