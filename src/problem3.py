@@ -107,19 +107,18 @@ def run_test_problem3a():
 def problem3a(window, point, n):
     x = point.x
     y = point.y
-    line = rg.Line(point, rg.Point(x, y + 50))
     thickness = 1
-    line.thickness = 1
-    line.attach_to(window)
-    for k in range(n-1):
-            line = rg.Line(rg.Point(x + (20*(k+1)), y + (10*(k+1))),rg.Point(x +(20*(k+1)), y + 50 +(10*(1+k))))
-            line.thickness = line.thickness + 2*(k+1)
-            if line.thickness > 13:
-                line.thickness = 13
-            line.attach_to(window)
-            thickness = thickness + line.thickness
+    sum = 0
+    for k in range(n):
+        line = rg.Line(rg.Point(x + (20*(k)), y + (10*(k))),rg.Point(x +(20*(k)), y + 50 +(10*(k))))
+        line.thickness = thickness + 2*(k)
+        if line.thickness > 13:
+            line.thickness = 13
+        sum = sum + line.thickness
+        line.attach_to(window)
+
     window.render()
-    return thickness
+    return sum
 
 
     """
@@ -183,13 +182,14 @@ def run_test_problem3b():
 
 def problem3b(m, point1):
     window = rg.RoseWindow(400,650)
-    thickness = 1
+    sum = 0
     for k in range(m):
 
-        thickness = thickness + problem3a(window,rg.Point(point1.x, point1.y + (60*k)), (2*k)+2)
+        sum = sum + problem3a(window,rg.Point(point1.x, point1.y + (60*k)), (2*k)+3)
 
     window.render()
     window.close_on_mouse_click()
+    return sum
     """
     See   problem3b_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
