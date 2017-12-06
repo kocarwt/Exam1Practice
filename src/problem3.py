@@ -2,8 +2,8 @@
 PRACTICE Test 1, problem 3.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and William Kocar.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -37,7 +37,7 @@ def main():
 def run_test_problem3a():
     """ Tests the   problem3a   function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # Done: 2. Implement this TEST function.
     #   It TESTS the  problem1a  function defined below.
     #   Include at least **   5   ** tests (we wrote four for you).
     # ------------------------------------------------------------------
@@ -105,6 +105,23 @@ def run_test_problem3a():
 
 
 def problem3a(window, point, n):
+    x = point.x
+    y = point.y
+    line = rg.Line(point, rg.Point(x, y + 50))
+    thickness = 1
+    line.thickness = 1
+    line.attach_to(window)
+    for k in range(n-1):
+            line = rg.Line(rg.Point(x + (20*(k+1)), y + (10*(k+1))),rg.Point(x +(20*(k+1)), y + 50 +(10*(1+k))))
+            line.thickness = line.thickness + 2*(k+1)
+            if line.thickness > 13:
+                line.thickness = 13
+            line.attach_to(window)
+            thickness = thickness + line.thickness
+    window.render()
+    return thickness
+
+
     """
     See   problem3a_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
@@ -137,7 +154,7 @@ def problem3a(window, point, n):
         :type n:      int
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -165,6 +182,14 @@ def run_test_problem3b():
 
 
 def problem3b(m, point1):
+    window = rg.RoseWindow(400,650)
+    thickness = 1
+    for k in range(m):
+
+        thickness = thickness + problem3a(window,rg.Point(point1.x, point1.y + (60*k)), (2*k)+2)
+
+    window.render()
+    window.close_on_mouse_click()
     """
     See   problem3b_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
